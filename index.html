@@ -8,7 +8,7 @@
         function fetchAccessToken() {
             const clientId = 'o0hvx4fhtvehc4bk6mh1573h2ham13';
             const redirectUri = window.location.origin + window.location.pathname;
-            const authUrl = `https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=chat:read+chat:edit&force_verify=true`;
+            const authUrl = `https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=user:read:chat+user:bot+channel:bot&force_verify=true`;
             window.location.href = authUrl;
         }
 
