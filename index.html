@@ -5,22 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>chattrBox token fetcher</title>
     <script>
-        function fetchAccessToken() {
-            const clientId = 'o0hvx4fhtvehc4bk6mh1573h2ham13';
-            const redirectUri = window.location.origin + window.location.pathname;
-            const authUrl = `https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=user:read:chat+user:bot+channel:bot&force_verify=true`;
-            window.location.href = authUrl;
-        }
-
         function displayAccessToken() {
             const hash = window.location.hash;
             const params = new URLSearchParams(hash.substring(1));
             const accessToken = params.get('access_token');
 
             if (accessToken) {
-                document.getElementById('token-display').textContent = `Access Token: ${accessToken}`;
-                // Clear the URL hash to hide the token
+                const tokenInput = document.getElementById('token-input');
+                tokenInput.value = accessToken;
+                tokenInput.style.display = 'inline';
                 history.replaceState(null, null, window.location.pathname);
+            } else {
+                document.getElementById('token-input').style.display = 'none';
             }
         }
 
@@ -35,10 +31,9 @@
     <p>
         This token fetcher runs entirely on the client side, no data stored here.
     </p>
-    <button onclick="fetchAccessToken()">Fetch Access Token</button>
     <p>
         <strong>Client ID:</strong> o0hvx4fhtvehc4bk6mh1573h2ham13
     </p>
-    <p id="token-display" style="color: red">Access Token will be displayed here.</p>
+    <input id="token-input" type="password" readonly style="display:none; width: 100%; color: red; font-size: large;" />
 </body>
 </html>
